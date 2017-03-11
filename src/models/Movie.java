@@ -1,6 +1,8 @@
 package models;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lindsey on 2017-03-11.
@@ -13,6 +15,7 @@ public class Movie {
     private int yearReleased;
     private String description;
     private URL trailer;
+    private List<Genre> genres;
 
     public Movie(String title, Director director, int yearReleased){
         this.director = director;
@@ -22,6 +25,8 @@ public class Movie {
         description = "";
         language = "";
         trailer = null;
+        genres = new ArrayList<>();
+
     }
 
     public void setLanguage(String language) {
@@ -54,6 +59,10 @@ public class Movie {
 
     public URL getTrailer(){
         return trailer;
+    }
+
+    public void addGenre(Genre genre){
+        genres.add(genre);
     }
 
 }
