@@ -6,7 +6,6 @@ import java.net.URL;
  * Created by Lindsey on 2017-03-11.
  */
 public class Movie {
-
     private Director director;
     private String title;
     private String language;
