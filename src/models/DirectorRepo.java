@@ -61,7 +61,9 @@ public class DirectorRepo {
     public Set<Director> getDirectorsWithIdentity(Identity identity) {
         Set<Director> result = new HashSet<>();
         for (Director d : directors) {
-            //TODO
+            if (d.hasIdentity(identity)) {
+                result.add(d);
+            }
         }
         return result;
     }

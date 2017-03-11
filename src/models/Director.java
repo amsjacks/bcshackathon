@@ -42,7 +42,7 @@ public class Director {
     public Set<Movie> getMoviesDirected() {
         Set<Movie> result = new HashSet<>();
         for (Movie movie : moviesDirected) {
-            //TODO
+            result.add(movie);
         }
         return result;
     }
@@ -58,21 +58,36 @@ public class Director {
     }
 
     public Set<Identity> getIdentitySet() {
-        //TODO
-        return new HashSet<Identity>();
+        return identitySet;
+    }
+
+    public boolean hasIdentity(Identity identity) {
+        return identitySet.contains(identity);
     }
 
     public void addIdentity(Identity identity) {
-        // TODO
+        identitySet.add(identity);
     }
 
     public boolean isInAny(Set<Identity> identities) {
-        // TODO
-        return false; // stub
+        boolean result = false;
+        for (Identity i : identities) {
+            if (this.hasIdentity(i)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     public boolean isInAll(Set<Identity> identities) {
-        // TODO
-        return false; //Stub
+        boolean result = true;
+        for (Identity i : identities) {
+            if (!this.hasIdentity(i)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 }

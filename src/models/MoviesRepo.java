@@ -53,7 +53,7 @@ public class MoviesRepo {
 
     public Set<Movie> getAllMovies() { return movies; }
 
-    // Returns set of movies with directors in the intersection of the identities in the set. Returns no movies for an empty set.
+    // Returns set of movies with directors in the intersection of the identities in the set. Returns all movies for an empty set.
     public Set<Movie> getMoviesAllIdentites(Set<Identity> identities) {
         Set<Movie> result = new HashSet<>();
         for (Movie m : movies) {
