@@ -4,6 +4,8 @@ import models.exceptions.AlreadyExistsException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Lindsey on 2017-03-11.
@@ -16,7 +18,9 @@ public class Movie {
     private int yearReleased;
     private String description;
     private URL trailer;
+
     private MoviesRepo repo;
+    private List<Genre> genres;
 
     public Movie(String title, Director director, int yearReleased) throws AlreadyExistsException {
         this.repo = MoviesRepo.getInstance();
@@ -31,6 +35,7 @@ public class Movie {
             description = "";
             language = "";
             trailer = null;
+            genres = new ArrayList<>();
         }
     }
 
@@ -51,6 +56,7 @@ public class Movie {
             description = "";
             language = "";
             trailer = null;
+            genres = new ArrayList<>();
         }
     }
 
@@ -102,4 +108,8 @@ public class Movie {
     public int getYearReleased() { return yearReleased; }
 
     public String getTitle() { return title; }
+
+    public void addGenre(Genre genre){
+        genres.add(genre);
+    }
 }
