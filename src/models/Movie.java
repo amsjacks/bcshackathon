@@ -1,5 +1,8 @@
 package models;
 
+import models.exceptions.AlreadyExistsException;
+
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +18,46 @@ public class Movie {
     private int yearReleased;
     private String description;
     private URL trailer;
+
+    private MoviesRepo repo;
     private List<Genre> genres;
 
-    public Movie(String title, Director director, int yearReleased){
-        this.director = director;
-        this.title = title;
-        this.yearReleased = yearReleased;
-        awardWinner = false;
-        description = "";
-        language = "";
-        trailer = null;
-        genres = new ArrayList<>();
+    public Movie(String title, Director director, int yearReleased) throws AlreadyExistsException {
+        this.repo = MoviesRepo.getInstance();
 
+        if(repo.inRepo(title, director, yearReleased)) {
+            throw new AlreadyExistsException();
+        } else {
+            this.director = director;
+            this.title = title;
+            this.yearReleased = yearReleased;
+            awardWinner = false;
+            description = "";
+            language = "";
+            trailer = null;
+            genres = new ArrayList<>();
+        }
+    }
+
+    public Movie(String title, String directorName, int yearReleased) throws AlreadyExistsException {
+        this.repo = MoviesRepo.getInstance();
+        try {
+            director = new Director(directorName);
+        } catch (AlreadyExistsException e) {
+            director = DirectorRepo.getInstance().getDirector(directorName);
+        }
+
+        if(repo.inRepo(title, director, yearReleased)) {
+            throw new AlreadyExistsException();
+        } else {
+            this.title = title;
+            this.yearReleased = yearReleased;
+            awardWinner = false;
+            description = "";
+            language = "";
+            trailer = null;
+            genres = new ArrayList<>();
+        }
     }
 
     public void setLanguage(String language) {
@@ -57,12 +88,28 @@ public class Movie {
         trailer = link;
     }
 
+    public void setTrailer(String urlString) {
+        URL link = null;
+        try {
+            link = new URL(urlString);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            System.err.println("Input is not in URL format!");
+        }
+        trailer = link;
+    }
+
     public URL getTrailer(){
         return trailer;
     }
 
+    public Director getDirector() { return director; }
+
+    public int getYearReleased() { return yearReleased; }
+
+    public String getTitle() { return title; }
+
     public void addGenre(Genre genre){
         genres.add(genre);
     }
-
 }
