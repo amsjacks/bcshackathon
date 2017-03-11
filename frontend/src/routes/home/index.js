@@ -16,24 +16,32 @@ export default {
 
   path: '/',
 
-  async action() {
-    const resp = await fetch('/graphql', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: '{news{title,link,content}}',
-      }),
-      credentials: 'include',
-    });
-    const { data } = await resp.json();
-    if (!data || !data.news) throw new Error('Failed to load the news feed.');
+  // async action() {
+  //   const resp = await fetch('/graphql', {
+  //     method: 'post',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       query: '{news{title,link,content}}',
+  //     }),
+  //     credentials: 'include',
+  //   });
+  //   const { data } = await resp.json();
+  //   if (!data || !data.news) throw new Error('Failed to load the news feed.');
+  //   return {
+  //     title: 'React Starter Kit',
+  //     component: <Layout><Home news={data.news} /></Layout>,
+  //   };
+  // },
+
+  action() {
     return {
-      title: 'React Starter Kit',
-      component: <Layout><Home news={data.news} /></Layout>,
+      title: "Hello World!",
+      component: <Layout><Home /></Layout>,
     };
   },
+  
 
 };
