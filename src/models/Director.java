@@ -51,6 +51,12 @@ public class Director {
         moviesDirected.add(movie);
     }
 
+    public void addMovieDirected(String title, int yearReleased) throws AlreadyExistsException {
+        //TODO: check whether movie is already in db
+        Movie movie = new Movie(title, this, yearReleased);
+        moviesDirected.add(movie);
+    }
+
     public Set<Identity> getIdentitySet() {
         //TODO
         return new HashSet<Identity>();
@@ -60,4 +66,13 @@ public class Director {
         // TODO
     }
 
+    public boolean isInAny(Set<Identity> identities) {
+        // TODO
+        return false; // stub
+    }
+
+    public boolean isInAll(Set<Identity> identities) {
+        // TODO
+        return false; //Stub
+    }
 }
