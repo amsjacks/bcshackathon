@@ -1,5 +1,7 @@
 package models;
 
+import models.exceptions.AlreadyExistsException;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,16 +63,30 @@ public class DirectorRepo {
     public Set<Director> getDirectorsWithIdentity(Identity identity) {
         Set<Director> result = new HashSet<>();
         for (Director d : directors) {
-            //TODO
+            if (d.hasIdentity(identity)) {
+                result.add(d);
+            }
         }
         return result;
     }
 
-    public int getNextID() {
-        return nextId++;
+    public Set<Director> getAllDirectors() {
+        return directors;
     }
 
     public void addDirector(Director director) {
-        //TODO
+        directors.add(director);
+    }
+
+    public void addDirector(String directorName) {
+        try {
+            new Director(directorName);
+        } catch (AlreadyExistsException e) {
+            System.err.println("Director already added!");
+        }
+    }
+
+    public int getNextID() {
+        return nextId++;
     }
 }

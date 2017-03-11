@@ -53,7 +53,7 @@ public class MoviesRepo {
 
     public Set<Movie> getAllMovies() { return movies; }
 
-    // Returns set of movies with directors in the intersection of the identities in the set. Returns no movies for an empty set.
+    // Returns set of movies with directors in the intersection of the identities in the set. Returns all movies for an empty set.
     public Set<Movie> getMoviesAllIdentites(Set<Identity> identities) {
         Set<Movie> result = new HashSet<>();
         for (Movie m : movies) {
@@ -71,6 +71,27 @@ public class MoviesRepo {
             if (m.getDirector().isInAny(identities)) {
                 result.add(m);
             }
-        }        return result;
+        }
+        return result;
+    }
+
+    public Set<Movie> getMoviesByDate(int yearReleased) {
+        Set<Movie> result = new HashSet<>();
+        for (Movie m : movies) {
+            if (m.getYearReleased() == yearReleased) {
+                result.add(m);
+            }
+        }
+        return result;
+    }
+
+    public Set<Movie> getAwardWinningMovies() {
+        Set<Movie> result = new HashSet<>();
+        for (Movie m : movies) {
+            if (m.isAwardWinner()) {
+                result.add(m);
+            }
+        }
+        return result;
     }
 }

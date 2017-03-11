@@ -72,7 +72,7 @@ public class Movie {
         awardWinner = !awardWinner;
     }
 
-    public boolean returnAwardStatus(){
+    public boolean isAwardWinner(){
         return awardWinner;
     }
 
