@@ -71,6 +71,27 @@ public class MoviesRepo {
             if (m.getDirector().isInAny(identities)) {
                 result.add(m);
             }
-        }        return result;
+        }
+        return result;
+    }
+
+    public Set<Movie> getMoviesByDate(int yearReleased) {
+        Set<Movie> result = new HashSet<>();
+        for (Movie m : movies) {
+            if (m.getYearReleased() == yearReleased) {
+                result.add(m);
+            }
+        }
+        return result;
+    }
+
+    public Set<Movie> getAwardWinningMovies() {
+        Set<Movie> result = new HashSet<>();
+        for (Movie m : movies) {
+            if (m.isAwardWinner()) {
+                result.add(m);
+            }
+        }
+        return result;
     }
 }
