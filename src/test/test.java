@@ -14,6 +14,7 @@ import java.util.List;
 public class test {
     private List<String> directorList;
 
+
     @Test
     public void testParse() throws ResourceParsingException, IOException {
         String DATA_SOURCE = "./data/directors.xml";
